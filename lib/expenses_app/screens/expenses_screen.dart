@@ -1,3 +1,5 @@
+import 'package:expence_app/expenses_app/components/expenses_list.dart';
+import 'package:expence_app/expenses_app/components/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:expence_app/expenses_app/models/expense.dart';
 
@@ -25,23 +27,31 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       category: Category.food,
     ),
   ];
+  void _showAddExpenseScreen() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => const NewExpense(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Scaffold(
-        appBar: AppBar(title: Text('Expenses Application')),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Welcome to the Expenses Application.',
-              textAlign: TextAlign.center,
-            ),
-            Text('This the the Home Screen.', textAlign: TextAlign.center),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Expenses Application'),
+        actions: [
+          IconButton(
+            onPressed: _showAddExpenseScreen,
+            icon: const Icon(Icons.add),
+          ),
+        ],
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(child: ExpensesList(expenses: _registeredExpenses)),
+        ],
       ),
     );
   }
