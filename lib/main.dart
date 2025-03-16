@@ -1,4 +1,5 @@
 import "package:expence_app/expenses_app/screens/expenses_screen.dart";
+import 'package:flutter/services.dart';
 import "package:flutter/material.dart";
 
 bool isDarkTheme = false;
@@ -13,6 +14,14 @@ ColorScheme kDarkColorScheme = ColorScheme.fromSeed(
 );
 
 void main() {
+  // // for locking the device orientation
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((
+  //   fn,
+  // ) {
+  //   runApp(const MyApp());
+  // });
+
   runApp(const MyApp());
 }
 

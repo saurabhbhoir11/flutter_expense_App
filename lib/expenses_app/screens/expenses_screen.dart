@@ -31,6 +31,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   ];
   void _showAddExpenseScreen() {
     showModalBottomSheet(
+      useSafeArea: true,
+      enableDrag: true,
       isScrollControlled: true,
       context: context,
       builder: (ctx) => NewExpense(addExpense: _addExpense),
@@ -71,6 +73,11 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
+    // print(MediaQuery.of(context).size.width);
+    // print(MediaQuery.of(context).size.height);
+
     Widget mainContent = Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
@@ -121,14 +128,24 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(child: mainContent),
-        ],
-      ),
+      body:
+          width < 600
+              ? Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Chart(expenses: _registeredExpenses),
+                  Expanded(child: mainContent),
+                ],
+              )
+              : Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(child: Chart(expenses: _registeredExpenses)),
+                  Expanded(child: mainContent),
+                ],
+              ),
     );
   }
 }
