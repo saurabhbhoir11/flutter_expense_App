@@ -9,10 +9,10 @@ class ExpenseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      color: const Color(0xfffffbed),
-      elevation: 10,
-      shadowColor: Colors.black,
+      // margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      // color: const Color(0xfffffbed),
+      // elevation: 10,
+      // shadowColor: Colors.black,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 20),
         child: Column(
@@ -20,7 +20,7 @@ class ExpenseItem extends StatelessWidget {
             Text(
               expense.title,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 18),
+              style: Theme.of(context).textTheme.titleSmall,
             ),
             const SizedBox(height: 10),
             Row(

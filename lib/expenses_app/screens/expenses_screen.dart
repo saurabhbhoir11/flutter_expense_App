@@ -15,7 +15,7 @@ class ExpensesScreen extends StatefulWidget {
 class _ExpensesScreenState extends State<ExpensesScreen> {
   final List<Expense> _registeredExpenses = [
     Expense(
-      title: 'expense1',
+      title: 'expense10',
       amount: 100,
       date: DateTime.now(),
       category: Category.travel,
@@ -39,10 +39,65 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     setState(() {
       _registeredExpenses.add(expense);
     });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Expense Added!')));
+  }
+
+  void _removeExpense(Expense expense) {
+    final expenseIndex = _registeredExpenses.indexOf(expense);
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Expense Deleted!'),
+        duration: const Duration(seconds: 3),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            setState(() {
+              _registeredExpenses.insert(expenseIndex, expense);
+            });
+          },
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text(
+              'No Expense Found Start Adding Some!',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20),
+            ),
+            const SizedBox(height: 5),
+            ElevatedButton(
+              onPressed: _showAddExpenseScreen,
+              child: const Text('Add Expense'),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    if (_registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+        expenses: _registeredExpenses,
+        onRemovedExpense: _removeExpense,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Expenses Application'),
@@ -56,9 +111,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(child: ExpensesList(expenses: _registeredExpenses)),
-        ],
+        children: [Expanded(child: mainContent)],
       ),
     );
   }

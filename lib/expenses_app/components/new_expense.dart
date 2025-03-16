@@ -47,8 +47,8 @@ class _NewExpenseState extends State<NewExpense> {
         context: context,
         builder:
             (ctx) => AlertDialog(
-              title: Text('Invalid Input!'),
-              content: Text(
+              title: const Text('Invalid Input!'),
+              content: const Text(
                 'Please Make Sure A Valid Title, Amount, Date And Category Was Entered.',
               ),
               actions: [
@@ -56,7 +56,7 @@ class _NewExpenseState extends State<NewExpense> {
                   onPressed: () {
                     Navigator.pop(ctx);
                   },
-                  child: Text('Okay!'),
+                  child: const Text('Okay!'),
                 ),
               ],
             ),
@@ -119,7 +119,7 @@ class _NewExpenseState extends State<NewExpense> {
                           ? 'No Date Selected'
                           : formatter.format(_selectedDate!),
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                     IconButton(
                       onPressed: _prestetDatePicker,
                       icon: const Icon(Icons.calendar_month),
