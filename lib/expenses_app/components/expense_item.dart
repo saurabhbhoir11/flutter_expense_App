@@ -27,7 +27,7 @@ class ExpenseItem extends StatelessWidget {
               children: [
                 Text(
                   expense.amount.toStringAsFixed(2),
-                  style: const TextStyle(fontSize: 15),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const Spacer(),
                 Row(
@@ -36,7 +36,7 @@ class ExpenseItem extends StatelessWidget {
                     const SizedBox(width: 5),
                     Text(
                       expense.formattedDate,
-                      style: const TextStyle(fontSize: 15),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),

@@ -47,7 +47,10 @@ class _NewExpenseState extends State<NewExpense> {
         context: context,
         builder:
             (ctx) => AlertDialog(
-              title: const Text('Invalid Input!'),
+              title: Text(
+                'Invalid Input!',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
               content: const Text(
                 'Please Make Sure A Valid Title, Amount, Date And Category Was Entered.',
               ),
@@ -139,7 +142,10 @@ class _NewExpenseState extends State<NewExpense> {
                         .map(
                           (category) => DropdownMenuItem(
                             value: category,
-                            child: Text(category.name.toUpperCase()),
+                            child: Text(
+                              category.name.toUpperCase(),
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
                           ),
                         )
                         .toList(),

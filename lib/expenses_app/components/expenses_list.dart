@@ -25,9 +25,7 @@ class ExpensesList extends StatelessWidget {
           },
           background: Container(
             color: Theme.of(context).colorScheme.error,
-            margin: EdgeInsets.symmetric(
-              horizontal: Theme.of(context).cardTheme.margin!.horizontal,
-            ),
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           ),
           child: ExpenseItem(expense: expenses[index]),
         );

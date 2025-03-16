@@ -1,5 +1,7 @@
+import 'package:expence_app/expenses_app/components/chart.dart';
 import 'package:expence_app/expenses_app/components/expenses_list.dart';
 import 'package:expence_app/expenses_app/components/new_expense.dart';
+import 'package:expence_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:expence_app/expenses_app/models/expense.dart';
 
@@ -102,7 +104,18 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       appBar: AppBar(
         title: const Text('Expenses Application'),
         actions: [
+          Switch(
+            value: MyApp.themeNotifier.value == ThemeMode.dark,
+            onChanged: (value) {
+              setState(() {
+                MyApp.themeNotifier.value =
+                    value ? ThemeMode.dark : ThemeMode.light;
+              });
+            },
+          ),
+          const SizedBox(width: 5),
           IconButton(
+            padding: EdgeInsets.symmetric(horizontal: 20),
             onPressed: _showAddExpenseScreen,
             icon: const Icon(Icons.add),
           ),
@@ -111,7 +124,10 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [Expanded(child: mainContent)],
+        children: [
+          Chart(expenses: _registeredExpenses),
+          Expanded(child: mainContent),
+        ],
       ),
     );
   }
